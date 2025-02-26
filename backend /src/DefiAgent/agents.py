@@ -16,6 +16,54 @@ api_key = os.environ.get("COHERE_API_KEY")
 
 co = cohere.ClientV2(api_key=api_key)
 
+def intent_detection_and_slot_filling(prompt: str):
+    try:
+        messages =  [
+            (
+                "system",
+                """Context: You are an expert in detecting the intent of the user and slot filling the JSON structure accordingly.
+                    Instructions: 
+                    - Analyze the user's query and find the slot filling the JSON structure accordingly
+                    - Slot fill the JSON structure accordingly
+                    - If you can't detect token name, that is the `name` field then create a random name for the token
+                    - If you can't detect token symbol, that is the `symbol` field then create a random symbol for the token. For example for token Name : "Agentonic" the symbol can be "AGT"
+                    - If you can't detect token initial supply, that is the `initialSupply` field then the default value for initial supply is 1000000
+                    - If you can't detect token max supply, that is the `maxSupply` field then the default value for max supply is 10000000
+                    Required JSON Structure:
+                    {
+                        "name": "string", # name of the token
+                        "symbol": "string", # symbol of the token
+                        "initialSupply": "integer", # initial supply of the token
+                        "maxSupply": "integer", # max supply of the token,
+                        "owner": "string" # owner of the token
+                    }
+
+                    response_format={"type": "json_object",
+                             "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {"type": "string"},
+                                    "symbol": {"type": "string"},
+                                    "initialSupply": {"type": "integer"},
+                                    "maxSupply": {"type": "integer"},
+                                    "owner": {"type": "string"} # owner of the token   
+                                },
+                                "required": ["name", "symbol", "initialSupply", "maxSupply", "owner"]
+                             }
+                        }
+                    """
+            ),
+            (
+                "human",
+                prompt
+            )
+        ]
+        response = secret_ai_llm.invoke(messages, stream=False)
+        print(response.content)
+        return response.content
+    except Exception as e:
+        return f"Error generating response: {str(e)}"
+
 DefiAnalysisSystemPrompt = """Context: You are an expert DeFi Optimizer. 
                     Instructions: 
                     - You are an expert DeFi Optimizer. You have all the Defi related knowledge and you are able to analyze the user's query about DeFi protocols and provide a comprehensive, step-by-step response. You are more statistical and you are able to give the best possible analysis for the user's query 
