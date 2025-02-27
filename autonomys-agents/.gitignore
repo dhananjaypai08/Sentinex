@@ -1,4 +1,4 @@
-characters/*
+
 !characters/character.example/
 .cookies/
 .google/
@@ -7,6 +7,7 @@ memories/
 # Python bytecode
 __pycache__/
 *.py[cod]
+*.env
 
 # Virtual environment
 venv/

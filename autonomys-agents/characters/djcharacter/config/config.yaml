@@ -1,0 +1,35 @@
+twitter:
+  post_tweets: true
+  model_configurations:
+    input_model_config:
+      provider: groq
+      model: llama-3.1-8b-instant	
+      temperature: 0.8
+    message_summary_model_config:
+      provider: groq
+      model: llama-3.1-8b-instant
+      temperature: 0.8
+    finish_workflow_model_config:
+      provider: groq
+      model: llama-3.1-8b-instant
+      temperature: 0.8
+
+auto_drive:
+  save_experiences: true
+  monitoring: true
+  network: 'taurus' # or 'taurus'
+
+orchestrator:
+  model_configurations:
+    input_model_config:
+      provider: groq
+      model: llama-3.1-8b-instant	
+      temperature: 0.8
+    message_summary_model_config:
+      provider: groq
+      model: llama-3.1-8b-instant	
+      temperature: 0.8
+    finish_workflow_model_config:
+      provider: groq
+      model: llama-3.1-8b-instant	
+      temperature: 0.8
