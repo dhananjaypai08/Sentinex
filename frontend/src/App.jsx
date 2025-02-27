@@ -5,6 +5,8 @@ import ProtocolDashboard from './components/ProtocolDashboard';
 import DeFiChatTerminal from './components/DeFiChatTerminal';
 import SocialLaunchpad from './components/SocialLaunchpad';
 import Landing from './components/Landing';
+import DefiChat from './components/DefiChat';
+
 const App = () => {
   return (
     <Web3Provider>
@@ -16,6 +18,7 @@ const App = () => {
             <Route path="/dashboard" element={<ProtocolDashboard />} />
             <Route path="/chat" element={<DeFiChatTerminal />} />
             <Route path="/social-launchpad" element={<SocialLaunchpad />} />
+            <Route path="/defi-chat" element={<DefiChat />} />
           </Routes>
         </div>
       </Router>

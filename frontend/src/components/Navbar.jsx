@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ConnectKitButton } from "connectkit";
-import { Sparkles, ArrowRight, FormInputIcon, ViewIcon, RocketIcon, Rocket } from 'lucide-react';
+import { Sparkles, ArrowRight, FormInputIcon, ViewIcon, RocketIcon, Rocket, BrainCircuitIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Navbar = () => {
@@ -38,22 +38,11 @@ export const Navbar = () => {
               <span>Social Launchpad</span>
             </Link>
 
-            <Link to="/dashboard" className="text-gray-300 hover:text-white flex items-center gap-1.5 transition-colors">
-              <ViewIcon className="w-4 h-4" />
-              <span>Dashboard</span>
+            <Link to="/defi-chat" className="text-gray-300 hover:text-white flex items-center gap-1.5 transition-colors">
+              <BrainCircuitIcon className="w-4 h-4" />
+              <span>Defi Chat</span>
             </Link>
             
-            <Link to="#how-it-works" className="text-gray-300 hover:text-white transition-colors">
-              How It Works
-            </Link>
-            
-            <Link to="#technology" className="text-gray-300 hover:text-white transition-colors">
-              Technology
-            </Link>
-
-            <Link to="#faq" className="text-gray-300 hover:text-white transition-colors">
-              FAQ
-            </Link>
           </div>
           
           {/* Connect Button */}

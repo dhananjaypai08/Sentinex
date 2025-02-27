@@ -4,19 +4,18 @@ import {
   CheckCircle, 
   Loader,
   Sparkles,
-  RocketIcon,
+  Rocket,
   BarChart2,
   MessageSquare,
   Twitter
 } from 'lucide-react';
-import { toast } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const STEPS = [
-  { id: 'analyze', title: 'Analyzing Market Sentiment', icon: BarChart2 },
-  { id: 'deploy', title: 'Deploying Token Contract', icon: RocketIcon },
-  { id: 'mint', title: 'Minting Initial Supply', icon: Sparkles },
-  { id: 'tweet', title: 'Announcing on Twitter', icon: Twitter }
+  { id: 'analyze', title: 'Market Analysis', icon: BarChart2 },
+  { id: 'deploy', title: 'Contract Deployment', icon: Rocket },
+  { id: 'mint', title: 'Token Minting', icon: Sparkles },
+  { id: 'tweet', title: 'Social Announcement', icon: Twitter }
 ];
 
 const MessageBubble = ({ message }) => {
@@ -24,28 +23,28 @@ const MessageBubble = ({ message }) => {
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}
+      transition={{ duration: 0.2 }}
+      className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-3`}
     >
       <div
-        className={`max-w-[80%] rounded-2xl px-6 py-4 ${
+        className={`max-w-[80%] rounded-lg px-4 py-3 ${
           isUser
-            ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/20'
-            : 'bg-gray-800 text-gray-100 border border-gray-700 shadow-lg'
+            ? 'bg-indigo-600 text-white shadow-sm'
+            : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 shadow-sm'
         }`}
       >
-        <p className="text-lg break-words">{message.content}</p>
+        <p className="text-base break-words">{message.content}</p>
         {message.links && message.links.map((link, index) => (
           <motion.a
             key={index}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="block mt-3 px-4 py-2 bg-gray-700 text-violet-400 rounded-lg hover:bg-gray-600 transition-all duration-200 text-center border border-violet-500/20"
+            className="block mt-2 px-3 py-1.5 bg-indigo-500/10 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 rounded hover:bg-indigo-500/15 dark:hover:bg-indigo-900/40 transition-all duration-200 text-center text-sm"
           >
             {link.text} →
           </motion.a>
@@ -58,9 +57,9 @@ const MessageBubble = ({ message }) => {
 const StepIndicator = ({ currentStep, completedSteps }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="fixed bottom-24 left-1/2 -translate-x-1/2 w-full max-w-lg bg-gray-800/95 backdrop-blur-md rounded-xl p-4 border border-violet-500/30 shadow-xl shadow-violet-900/20 z-20"
+      className="fixed bottom-20 left-1/2 -translate-x-1/2 w-full max-w-md bg-white/90 dark:bg-gray-900/90 backdrop-blur-md rounded-lg p-3 shadow-lg z-20"
     >
       <div className="flex justify-between">
         {STEPS.map((step, index) => {
@@ -71,38 +70,38 @@ const StepIndicator = ({ currentStep, completedSteps }) => {
           return (
             <div key={step.id} className="flex flex-col items-center flex-1">
               <div className="flex items-center w-full">
-                <div className={`flex-1 h-1 ${index === 0 ? 'hidden' : ''} ${
-                  isCompleted ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500' : 'bg-gray-600'
+                <div className={`flex-1 h-0.5 ${index === 0 ? 'hidden' : ''} ${
+                  isCompleted ? 'bg-indigo-500' : 'bg-gray-200 dark:bg-gray-700'
                 }`} />
                 <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                  whileHover={{ scale: 1.05 }}
+                  className={`w-7 h-7 rounded-full flex items-center justify-center ${
                     isCompleted
-                      ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white'
+                      ? 'bg-indigo-500 text-white'
                       : isCurrent
-                      ? 'bg-violet-500 text-white'
-                      : 'bg-gray-700 text-gray-400 border border-gray-600'
+                      ? 'bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-700'
+                      : 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-600'
                   }`}
                 >
                   {isCompleted ? (
-                    <CheckCircle className="w-5 h-5" />
+                    <CheckCircle className="w-4 h-4" />
                   ) : isCurrent ? (
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                     >
-                      <Loader className="w-5 h-5" />
+                      <Loader className="w-4 h-4" />
                     </motion.div>
                   ) : (
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-4 h-4" />
                   )}
                 </motion.div>
-                <div className={`flex-1 h-1 ${index === STEPS.length - 1 ? 'hidden' : ''} ${
-                  isCompleted ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500' : 'bg-gray-600'
+                <div className={`flex-1 h-0.5 ${index === STEPS.length - 1 ? 'hidden' : ''} ${
+                  isCompleted ? 'bg-indigo-500' : 'bg-gray-200 dark:bg-gray-700'
                 }`} />
               </div>
-              <span className={`mt-2 text-xs font-medium text-center ${
-                isCurrent ? 'text-violet-400' : isCompleted ? 'text-gray-300' : 'text-gray-500'
+              <span className={`mt-1.5 text-xs font-medium text-center ${
+                isCurrent ? 'text-indigo-600 dark:text-indigo-400' : isCompleted ? 'text-gray-700 dark:text-gray-300' : 'text-gray-400 dark:text-gray-500'
               }`}>
                 {step.title}
               </span>
@@ -114,15 +113,6 @@ const StepIndicator = ({ currentStep, completedSteps }) => {
   );
 };
 
-const GlowingBackground = () => {
-  return (
-    <>
-      <div className="fixed top-20 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="fixed bottom-20 right-1/4 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl pointer-events-none" />
-    </>
-  );
-};
-
 const SocialLaunchpad = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -131,13 +121,15 @@ const SocialLaunchpad = () => {
   const [completedSteps, setCompletedSteps] = useState([]);
   const messagesEndRef = useRef(null);
   const messageContainerRef = useRef(null);
+  const hasAddedWelcomeMessage = useRef(false);
 
   useEffect(() => {
-    // Welcome message
-    if (messages.length === 0) {
-      addMessage("Welcome to the Social Launchpad! 🚀 I can help you deploy your own token with a few simple steps. Just describe your token (e.g., Create a token with name Rocket, symbol RKT, and supply of 100000).");
+    // Welcome message - only add it once
+    if (messages.length === 0 && !hasAddedWelcomeMessage.current) {
+      addMessage("Welcome to the Social Launchpad. I can help you deploy your token in a few simple steps. Describe your token (e.g., Create a token named Rocket with symbol RKT and supply of 100,000).");
+      hasAddedWelcomeMessage.current = true;
     }
-  }, []);
+  }, [messages]);
 
   useEffect(() => {
     // Auto-scroll to bottom when new messages arrive
@@ -190,16 +182,16 @@ const SocialLaunchpad = () => {
       const tokenInfoData = await tokenInfo.json();
       
       if (!sentimentData.sentiment) {
-        addMessage("I'm sorry, but the market sentiment doesn't seem favorable right now. Maybe we should try again later.");
+        addMessage("I'm sorry, but the market sentiment doesn't seem favorable right now. Consider trying again later.");
         return;
       }
       
       completeStep('analyze');
-      addMessage("✨ Market sentiment analysis complete! The current market conditions look favorable for your token launch.");
+      addMessage("Market sentiment analysis complete. Current market conditions look favorable for your token launch.");
       
       // Step 2: Deploy Contract
       setCurrentStep('deploy');
-      addMessage("🔄 Deploying your token contract on the Auto EVM Taurus...");
+      addMessage("Deploying your token contract on Auto EVM Taurus...");
       
       const deployResponse = await fetch('http://localhost:5001/deployContract', {
         method: 'POST',
@@ -209,12 +201,12 @@ const SocialLaunchpad = () => {
       const deployData = await deployResponse.json();
       completeStep('deploy');
       
-      addMessage(`✅ Contract deployed successfully! Your token ${tokenInfoData.name} (${tokenInfoData.symbol}) is now live on the Taurus testnet.`);
+      addMessage(`Contract deployed successfully. ${tokenInfoData.name} (${tokenInfoData.symbol}) is now live on the Taurus testnet.`);
       
       // Step 3: Mint Tokens
       setCurrentStep('mint');
       const mintAmount = Math.floor(tokenInfoData.initialSupply * 0.5);
-      addMessage(`🔄 Minting ${mintAmount.toLocaleString()} tokens to ${tokenInfoData.owner.slice(0, 6)}...${tokenInfoData.owner.slice(-4)}`);
+      addMessage(`Minting ${mintAmount.toLocaleString()} tokens to ${tokenInfoData.owner.slice(0, 6)}...${tokenInfoData.owner.slice(-4)}`);
       
       const mintResponse = await fetch('http://localhost:5001/mintTokens', {
         method: 'POST',
@@ -228,13 +220,13 @@ const SocialLaunchpad = () => {
       const mintData = await mintResponse.json();
       completeStep('mint');
       
-      addMessage(`✅ Successfully minted ${mintAmount.toLocaleString()} ${tokenInfoData.symbol} tokens! Transaction hash: https://blockscout.taurus.autonomys.xyz/tx/0x${mintData}`);
+      addMessage(`Successfully minted ${mintAmount.toLocaleString()} ${tokenInfoData.symbol} tokens. Transaction hash: https://blockscout.taurus.autonomys.xyz/tx/0x${mintData}`);
 
       // Step 4: Post Tweet
       setCurrentStep('tweet');
-      addMessage("🔄 Announcing your token launch on Twitter...");
+      addMessage("Announcing your token launch on Twitter...");
       
-      const tweetContent = `I deployed my own token named $${tokenInfoData.symbol} and here is the contract address: ${deployData} on the taurus testnet`;
+      const tweetContent = `I deployed my own token named $${tokenInfoData.symbol} on Autonyms EVM Network (Taurus) and here is the contract address: ${deployData} on the taurus testnet`;
       const tweetResponse = await fetch('http://localhost:5001/postTweet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -243,11 +235,11 @@ const SocialLaunchpad = () => {
       const tweetData = await tweetResponse.json();
       completeStep('tweet');
       
-      addMessage("✅ Launch announcement has been posted on Twitter!");
+      addMessage("Launch announcement has been posted on Twitter.");
 
       // Final success message
       addMessage(
-        "🎉 Congratulations! Your token has been successfully launched!",
+        "Congratulations! Your token has been successfully launched.",
         'bot',
         [
           {
@@ -258,18 +250,17 @@ const SocialLaunchpad = () => {
       );
       
       addMessage(
-        `Here's a summary of your token launch:\n\n` +
-        `• Token Name: ${tokenInfoData.name}\n` +
+        `Token launch summary:\n\n` +
+        `• Name: ${tokenInfoData.name}\n` +
         `• Symbol: ${tokenInfoData.symbol}\n` +
         `• Initial Supply: ${mintAmount.toLocaleString()} tokens\n` +
-        `• Contract Address: ${deployData.slice(0, 8)}...${deployData.slice(-6)}\n` +
+        `• Contract: ${deployData.slice(0, 8)}...${deployData.slice(-6)}\n` +
         `• Market Sentiment: Positive\n` +
         `• Twitter Announcement: Complete`
       );
 
     } catch (error) {
       console.error('Error:', error);
-      toast.error("An error occurred during the process");
       addMessage("I'm sorry, but there was an error processing your request. Please try again.");
     } finally {
       setIsProcessing(false);
@@ -278,71 +269,63 @@ const SocialLaunchpad = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-black p-20 mt-1">
-      <GlowingBackground />
+    <div className="relative min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-black p-20 mt-1">
+      {/* Subtle background elements */}
+      <div className="absolute top-20 left-1/4 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
       
-      {/* Header */}
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="sticky top-0 z-20 bg-black/90 backdrop-blur-md p-6 border-b border-gray-800"
-      >
-        <div className="max-w-4xl mx-auto flex items-center gap-900">
-          <div className="relative">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute -z-10 inset-0 text-violet-500/20"
-            >
-              <Sparkles className="w-10 h-10" />
-            </motion.div>
-            <Sparkles className="w-10 h-10 text-violet-500" />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-violet-500 to-fuchsia-500 text-transparent bg-clip-text">
+      {/* Main content */}
+      <div className="container mx-auto px-4 pt-4 pb-16">
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="mb-6 px-4"
+        >
+          <div className="flex items-center gap-3">
+            <Sparkles className="w-5 h-5 text-indigo-500" />
+            <h2 className="text-xl font-medium text-gray-800 dark:text-gray-100">
               Social Launchpad
             </h2>
-            <p className="text-gray-400 mt-1">Launch any tokens based on real-time social sentiment and dynamic market conditions decided by 2 Agents Autonomys social Agent and @aixbt_agent from twitter</p>
           </div>
-        </div>
-      </motion.div>
-      
-      {/* Messages Container */}
-      <div 
-        ref={messageContainerRef}
-        className="flex-1 overflow-y-auto px-6 py-4 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
-      >
-        <div className="max-w-4xl mx-auto pb-20">
-          <div className="space-y-4">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 ml-8">
+            Launch tokens based on real-time social sentiment and market conditions
+          </p>
+        </motion.div>
+        
+        {/* Messages Container */}
+        <div 
+          ref={messageContainerRef}
+          className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 h-[calc(100vh-220px)] overflow-y-auto"
+        >
+          <div className="p-4">
             <AnimatePresence>
               {messages.map((message, index) => (
                 <MessageBubble key={index} message={message} />
               ))}
             </AnimatePresence>
+            <div ref={messagesEndRef} />
           </div>
-          <div ref={messagesEndRef} />
         </div>
-      </div>
 
-      {/* Step Indicator */}
-      {currentStep && (
-        <StepIndicator
-          currentStep={currentStep}
-          completedSteps={completedSteps}
-        />
-      )}
+        {/* Step Indicator */}
+        {currentStep && (
+          <StepIndicator
+            currentStep={currentStep}
+            completedSteps={completedSteps}
+          />
+        )}
 
-      {/* Input Form */}
-      <div className="sticky bottom-0 border-t border-gray-800 bg-black/95 backdrop-blur-md py-4 px-6 z-10">
-        <div className="max-w-4xl mx-auto">
+        {/* Input Form */}
+        <div className="mt-4">
           <form onSubmit={handleSubmit} className="relative">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Describe your token launch (e.g., Create a token with name Rocket, symbol RKT, and supply of 100000)"
-              className="w-full bg-gray-800 text-white rounded-xl px-6 py-4 pr-14 focus:outline-none focus:ring-2 focus:ring-violet-500 text-lg border border-gray-700 shadow-lg transition-all duration-200"
+              placeholder="Describe your token (e.g., Create a token named Rocket with symbol RKT and supply of 100,000)"
+              className="w-full bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm border border-gray-200 dark:border-gray-800 shadow-sm"
               disabled={isProcessing}
             />
             <motion.button
@@ -350,22 +333,22 @@ const SocialLaunchpad = () => {
               disabled={isProcessing}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-violet-500 hover:text-violet-400 transition-colors disabled:opacity-50"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors disabled:opacity-50"
             >
               {isProcessing ? (
                 <motion.div
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
                 >
-                  <Loader className="w-8 h-8" />
+                  <Loader className="w-5 h-5" />
                 </motion.div>
               ) : (
-                <ArrowUpCircle className="w-8 h-8" />
+                <ArrowUpCircle className="w-5 h-5" />
               )}
             </motion.button>
           </form>
-          <p className="text-xs text-gray-500 mt-2 ml-2">
-            Pro tip: Include token name, symbol, and supply in your description
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 ml-2">
+            Include token name, symbol, and supply in your description
           </p>
         </div>
       </div>
