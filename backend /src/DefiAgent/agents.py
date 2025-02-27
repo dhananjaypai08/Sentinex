@@ -162,24 +162,11 @@ async def detect_intent(prompt: str):
                     - Provide a comprehensive, step-by-step response
                     - Include protocol recommendations, potential benefits, and risks
                     - Don't give 'None' or 'N/A' as a response for anything, if you don't have the data, just search the internet and give the latest data for it and don't ever give `None` as a response for any field.
-                    - The `parameters` attribute in the json response should be like this example : ["0x1234567890123456789012345678901234567890"] (address for the balance) or ["0x1234567890123456789012345678901234567890", "1"] (address and amount to transfer) or ["0x1234567890123456789012345678901234567890", "0x1234567890123456789012345678901234567890", 1, 1] (input token address, output token address, amount to swap and slippage percentage), ["sonic", "ethereum", "1", "0x1234567890123456789012345678901234567890"] (source network, destination network, input amount to bridge and address), for other actions, the parameters should be like this example : [], for analyze-defi, the parameters should be like this example : []
-                    - For action : get-balance, the parameters should be like this example : ["0x1234567890123456789012345678901234567890"]
+                    - The `parameters` attribute in the json response should be like this example : ["0x1234567890123456789012345678901234567890", "1"] (address and amount to transfer) or   ["ethereum", "taurus", "0.1", "0x1234567890123456789012345678901234567890"] (source network, destination network, input amount to bridge and address), for other actions, the parameters should be like this example : [], for analyze-defi, the parameters should be like this example : []
                     - For action : transfer, the parameters should be like this example : ["0x1234567890123456789012345678901234567890", "1"]
                     - For action : bridge, the parameters should be like this example : ["sonic", "ethereum", "1", "0x1234567890123456789012345678901234567890"]
-                    - For action : analyze-defi, the parameters should be like this example : []
+                    - For action : analyze, the parameters should be like this example : []
                     - For action : other, the parameters should be like this example : [] # This means that the action is not listed in the actions list and is just a normal query
-
-                    AVAILABLE ACTIONS:
-                  
-                    - get-balance: Get $S or token balance
-                      Parameters:
-                        - address (optional): Address to check balance for
-                        - token_address (optional): Optional token address
-                    - transfer: Send $S or tokens
-                      Parameters:
-                        - to_address (required): Recipient address
-                        - amount (required): Amount to transfer
-                        - token_address (optional): Optional token address
                     """
                 },
                 {
@@ -192,7 +179,7 @@ async def detect_intent(prompt: str):
                                 "type": "object",
                                 "properties": {
                                     "action": {"type": "string"},
-                                    "parameters": {"type": "array"}, # for example : ["0x1234567890123456789012345678901234567890"] (address for the balance) or ["0x1234567890123456789012345678901234567890", 1] (address and amount to transfer) or ["0x1234567890123456789012345678901234567890", "0x1234567890123456789012345678901234567890", 1, 1] (input token address, output token address, amount to swap and slippage percentage)
+                                    "parameters": {"type": "array"}, # ["0x1234567890123456789012345678901234567890", 1] (address and amount to transfer) or ["ethereum", "taurus", 0.1, "0x1234567890123456789012345678901234567890"] (source network, destination network, amount to bridge and address) and for analyze, the parameters should be like this example : []
                                 },
                                 "required": ["action", "parameters"]
                              }

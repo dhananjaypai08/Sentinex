@@ -43,7 +43,7 @@ async def chat(request: Request):
     print(data)
     if data['action'] != 'other':
         if data['action'] == 'analyze':
-            response = defi_analysis(prompt)
+            response = await defi_analysis(prompt)
             data = json.loads(response)
             print(data)
             return data

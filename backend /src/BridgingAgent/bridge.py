@@ -32,8 +32,8 @@ def bridge_sepolia_to_auto_evm(amount: int, address: str):
 
 def bridge_auto_evm_to_sepolia(amount: int, address: str):
     tx_hash = bridge_sepolia_to_auto_evm(amount, address)
-    print(f"Transaction sent on Sepolia: {tx.hex()}")
-    txh_url = f"https://sepolia.etherscan.io/tx/{tx.hex()}"
+    print(f"Transaction sent on Sepolia: {tx_hash}")
+    txh_url = f"https://sepolia.etherscan.io/tx/0x{tx_hash}"
 
     account = Account.from_key(private_key)
     tx = {
@@ -48,7 +48,7 @@ def bridge_auto_evm_to_sepolia(amount: int, address: str):
     signed_tx = auto_evm_web3.eth.account.sign_transaction(tx, private_key)
     tx_hash = auto_evm_web3.eth.send_raw_transaction(signed_tx.raw_transaction).hex()
     print(f"Transaction sent on AutoEVM: {tx_hash}")
-    txh_url = f"https://blockscout.taurus.autonomys.xyz/tx/{tx_hash}"
-    return {"AutoEVMURL": txh_url , "SepoliaURL": txh_url}
+    txn_url = f"https://blockscout.taurus.autonomys.xyz/tx/0x{tx_hash}"
+    return {"AutoEVMURL": txn_url , "SepoliaURL": txh_url}
     
     
