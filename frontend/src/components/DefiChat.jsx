@@ -229,7 +229,7 @@ const MessageBubble = ({ message }) => {
           const isAutonomys = typeof link === 'string' && link.includes('autonomys');
           
           const linkText = isEtherscan ? "View on Etherscan" :
-                          isAutonomys ? "View on Autonyms Explorer" :
+                          isAutonomys ? "View on Autonomys Explorer" :
                           typeof link === 'object' && link.text ? link.text : "View Transaction";
           
           const linkUrl = typeof link === 'object' && link.url ? link.url : link;

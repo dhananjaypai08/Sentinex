@@ -963,22 +963,22 @@ const Landing = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <motion.a 
-                  href="/app" 
+                  href="/social-launchpad" 
                   className="bg-gradient-to-r from-violet-600 to-fuchsia-600 px-8 py-4 rounded-lg font-medium flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-violet-600/20 transition-all"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Launch App
+                  Launch Token
                   <ArrowRight className="w-5 h-5" />
                 </motion.a>
                 
                 <motion.a 
-                  href="/documentation" 
+                  href="/defi-chat" 
                   className="px-8 py-4 rounded-lg font-medium flex items-center justify-center gap-2 border border-gray-700 hover:border-violet-500 transition-all"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  View Documentation
+                  Secret Defi Agent Assistant
                   <ExternalLink className="w-5 h-5" />
                 </motion.a>
               </motion.div>
