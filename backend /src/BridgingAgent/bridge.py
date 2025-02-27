@@ -11,12 +11,12 @@ load_dotenv()
 private_key = os.getenv("PRIVATE_KEY")
 
 SEPOLIA_RPC_URL = os.getenv("SEPOLIA_RPC_URL")
-BASE_SEPOLIA_RPC_URL = os.getenv("BASE_SEPOLIA_RPC_URL")
+AUTO_EVM_RPC_URL = os.getenv("AUTO_EVM_RPC_URL")
 
 sepolia_web3 = Web3(Web3.HTTPProvider(SEPOLIA_RPC_URL))
-base_sepolia_web3 = Web3(Web3.HTTPProvider(BASE_SEPOLIA_RPC_URL))
+auto_evm_web3 = Web3(Web3.HTTPProvider(AUTO_EVM_RPC_URL))
 
-def bridge_sepolia_to_base_sepolia(amount: int):
+def bridge_sepolia_to_auto_evm(amount: int, address: str):
     account = Account.from_key(private_key)
     tx = {
         'nonce': sepolia_web3.eth.get_transaction_count(account.address),
@@ -30,17 +30,25 @@ def bridge_sepolia_to_base_sepolia(amount: int):
     tx_hash = sepolia_web3.eth.send_raw_transaction(signed_tx.raw_transaction)
     return tx_hash.hex()
 
-def bridge_base_sepolia_to_sepolia(amount: int):
+def bridge_auto_evm_to_sepolia(amount: int, address: str):
+    tx_hash = bridge_sepolia_to_auto_evm(amount, address)
+    print(f"Transaction sent on Sepolia: {tx.hex()}")
+    txh_url = f"https://sepolia.etherscan.io/tx/{tx.hex()}"
+
     account = Account.from_key(private_key)
     tx = {
-        'nonce': base_sepolia_web3.eth.get_transaction_count(account.address),
-        'to': account.address,
+        'nonce': auto_evm_web3.eth.get_transaction_count(account.address),
+        'from': account.address,
+        'to': address,
         'value': Web3.to_wei(amount, 'ether'),
         'gas': 21000,
-        'gasPrice': base_sepolia_web3.eth.gas_price,
-        'chainId': 84532,
+        'gasPrice': auto_evm_web3.eth.gas_price,
+        'chainId': 490000,
     }   
-    signed_tx = base_sepolia_web3.eth.account.sign_transaction(tx, private_key)
-    tx_hash = base_sepolia_web3.eth.send_raw_transaction(signed_tx.raw_transaction)
-    return tx_hash.hex()
+    signed_tx = auto_evm_web3.eth.account.sign_transaction(tx, private_key)
+    tx_hash = auto_evm_web3.eth.send_raw_transaction(signed_tx.raw_transaction).hex()
+    print(f"Transaction sent on AutoEVM: {tx_hash}")
+    txh_url = f"https://blockscout.taurus.autonomys.xyz/tx/{tx_hash}"
+    return {"AutoEVMURL": txh_url , "SepoliaURL": txh_url}
+    
     

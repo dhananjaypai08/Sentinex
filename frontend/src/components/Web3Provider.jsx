@@ -4,22 +4,22 @@ import { WagmiProvider, createConfig, http } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 
-const SepoliaTestnet = {
-  id: 11155111,
-  name: "Sepolia Testnet",
-  nativeCurrency: {name: 'Ether', symbol: 'ETH', decimals: 18},
+const TaurusTestnet = {
+  id: 490000,
+  name: "Autonomys Taurus Taurus",
+  nativeCurrency: {name: 'Autonomys Taurus Testnet', symbol: 'tAi3', decimals: 18},
   rpcUrls: {
-    default: { http : ["https://sepolia.drpc.org"] }
+    default: { http : ["https://auto-evm.taurus.autonomys.xyz/ws"] }
   },
   blockExplorers: {
-    default: { name: 'Sepolia Testnet Explorer', url: "https://sepolia.etherscan.io/" }
+    default: { name: 'Taurus Testnet Explorer', url: "https://blockscout.taurus.autonomys.xyz/" }
   },
 }
 
 const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
-    chains: [SepoliaTestnet],
+    chains: [TaurusTestnet],
     // transports: {
     //   // RPC URL for each chain
     //   [polygonZkEvmCardona.id]: http(

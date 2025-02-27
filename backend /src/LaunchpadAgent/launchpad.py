@@ -5,9 +5,9 @@ from web3 import Web3
 import requests
 import json
 
-sepolia_rpc_url = os.getenv("SEPOLIA_RPC_URL")
+auto_evm_rpc_url = os.getenv("AUTO_EVM_RPC_URL")
 
-w3 = Web3(Web3.HTTPProvider(sepolia_rpc_url))
+w3 = Web3(Web3.HTTPProvider(auto_evm_rpc_url))
 private_key = os.getenv("PRIVATE_KEY")
 account = Account.from_key(private_key)
 

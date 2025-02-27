@@ -131,8 +131,8 @@ export const Landing = () => {
 
             <div className="flex justify-center gap-6">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button onClick={() => navigate('/chat')} className="group">
-                  <span>Start Optimizing</span>
+                <Button onClick={() => navigate('/social-launchpad')} className="group">
+                  <span>Social Lauchpad</span>
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </motion.div>

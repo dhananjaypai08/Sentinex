@@ -4,6 +4,7 @@ import { Landing } from './components/Landing';
 import { Navbar } from './components/Navbar';
 import ProtocolDashboard from './components/ProtocolDashboard';
 import DeFiChatTerminal from './components/DeFiChatTerminal';
+import SocialLaunchpad from './components/SocialLaunchpad';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
             <Route path="/" element={<Landing />} />
             <Route path="/dashboard" element={<ProtocolDashboard />} />
             <Route path="/chat" element={<DeFiChatTerminal />} />
+            <Route path="/social-launchpad" element={<SocialLaunchpad />} />
           </Routes>
         </div>
       </Router>

@@ -123,38 +123,19 @@ def sentiment_analysis(prompt: str, tweets: list):
         messages = [
             (
                 "system",
-                """Context: You are an expert DeFi Optimizer who gives answers only in JSON format and does not contain any other data in response except the JSON response . 
-                    Important Instructions: 
-                    Strict Instuction: 
-                              1. The only response that you would give will be in JSON format and you response should only return something in this format : `{}`. 
-                              2. You would only provide the JSON response which can be easily loaded in my python script using json.loads(<your_response>)
-                    - You are an expert DeFi Optimizer. You have all the Defi related knowledge and you are able to analyze the user's query about DeFi protocols and provide a comprehensive, step-by-step response. You are more statistical and you are able to give the best possible analysis for the user's query 
-                    - You are heavy on statistics and on risk analysis for each protocol that you come up with
-                    - Provide a comprehensive, step-by-step response
-                    - Give statistics for the best defi protocol inlcuding the 'total slippage', 'net gains', 'safe and recommended protocols', 'estimate time for swap', 'potential fees'
-                    - Give proper links for the protocols
-                    - Only Give the latest data for the protocols
+                f"""Context: You are an expert in sentiment analysis.
+                    Instructions: 
+                    - Analyze the user's query and find the sentiment of the user
+                    - Analyze the tweets and find the sentiment of the user
+                    - Return false if the sentiment is very negative and for all other cases return true
+                    The tweets are : {list(tweets)}
                     
-                    Required JSON response structure:
+                    """+
+                    """JSON message format(response) : 
                     {
-                        "protocol_name": "string",
-                        "protocol_description": "string",
-                        "protocol_steps": [
-                            {
-                                "step_number": 1,
-                                "description": "string",
-                                "estimated_time": "string",
-                                "potential_fees": "string"
-                            }
-                        ],
-                        "protocol_link": "string",
-                        "estimated_slippage": "string",
-                        "slippage insights": "string",
-                        "overall_benefit": "string",
-                        "risks": ["string"],
-                        "alternative_protocols": ["string"]
+                        "sentiment": "boolean"
                     }
-                """
+                    """
             ),
             (
                 "human",
