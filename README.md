@@ -55,7 +55,7 @@ Web3 is fragmented, insecure, and lacks true autonomy:
 4. **Cohere Agent:**  
    - Ensures structured and accurate outputs.  
 
-5. **AI Agent (GitHub):**  
+5. **AI Agent Overall work:**  
    - Drives token launch logic, security audits, and sentiment analysis via Secret SDK and Autonomys Agent.  
 
 ---
