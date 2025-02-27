@@ -49,6 +49,7 @@ cp .env.example .env
 python3 src/main.py
 ```
 Note: For troubleshooting `certificate verification error`: Use conda as virtual environment
+
 2. Autonomys Agent setup 
 ```sh
 cd autonomys-agent
@@ -56,12 +57,14 @@ yarn install
 yarn dev djcharacter
 ```
 Note : Make sure to create and fill the .env in `autonomys-agent/characters/djcharacter/config/.env`
+
 3. Frontend setup 
 ```sh
 cd frontend 
 npm install 
 npm run dev
 ```
+
 Now you're project is running on localhost!
 
 ---
