@@ -22,8 +22,8 @@ def bridge_sepolia_to_auto_evm(amount: int, address: str):
         'nonce': sepolia_web3.eth.get_transaction_count(account.address),
         'to': account.address,
         'value': Web3.to_wei(amount, 'ether'),
-        'gas': 21000,
-        'gasPrice': sepolia_web3.eth.gas_price,
+        'gas': 30000,
+        'gasPrice': int(sepolia_web3.eth.gas_price * 1.2),
         'chainId': 11155111,
     }   
     signed_tx = sepolia_web3.eth.account.sign_transaction(tx, private_key)
@@ -41,8 +41,8 @@ def bridge_auto_evm_to_sepolia(amount: int, address: str):
         'from': account.address,
         'to': address,
         'value': Web3.to_wei(amount, 'ether'),
-        'gas': 21000,
-        'gasPrice': auto_evm_web3.eth.gas_price,
+        'gas': 30000,
+        'gasPrice': int(auto_evm_web3.eth.gas_price * 1.2),
         'chainId': 490000,
     }   
     signed_tx = auto_evm_web3.eth.account.sign_transaction(tx, private_key)

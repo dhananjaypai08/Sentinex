@@ -1,1 +1,8 @@
-autonomys-agents/
+.env
+frontend/.env
+backend/env/
+backend/src/__pycache__/
+backend/src/DefiAgent/__pycache__/
+backend/src/BridgeAgent/__pycache__/
+frontend/node_modules/
+Zerepy/

@@ -226,7 +226,7 @@ const Landing = () => {
                 transition={{ duration: 0.5 }}
               >
                 <div className="inline-block mb-4 px-4 py-1 bg-violet-900/30 backdrop-blur-sm rounded-full border border-violet-800/50 text-violet-300 text-sm">
-                  Powered by Autonomys AI Framework
+                  Powered by Autonomys AI Agent Framework
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                   <span className="bg-gradient-to-r from-violet-400 to-fuchsia-500 bg-clip-text text-transparent">Limitless DeFi</span> Agent with Sentiment Intelligence
