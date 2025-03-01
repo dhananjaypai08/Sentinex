@@ -15,7 +15,7 @@ Web3 is fragmented, insecure, and lacks true autonomy:
 
 ### 🛠️ **Features**  
 1. **Social Token Launch Agents:**  
-   - Detect trends on Twitter/Telegram via @aixbt_agent.  
+   - Detect trends on Twitter via @aixbt_agent.  
    - Launch tokens with Secret SDK.  
    - Mint 50% supply and auto-tweet the token contract.  
 
