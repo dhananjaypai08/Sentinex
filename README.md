@@ -42,21 +42,24 @@ Web3 is fragmented, insecure, and lacks true autonomy:
 1. Backend Setup 
 ```sh
 cd backend 
-python3 -m venv env 
+python3 -m venv env # or use conda to create virtual environment
 sourc env/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
 python3 src/main.py
 ```
-Note: For troubleshooting `certificate verification error`: Use conda as virtual environment
+Note : Make sure to create and fill the .env in `backend/.env` using the `backend/.env.example`
+
+Troubleshoot: For troubleshooting `certificate verification error`: Use conda as virtual environment
 
 2. Autonomys Agent setup 
 ```sh
 cd autonomys-agent
+cp autonomys-agent/characters/djcharacter/config/.env.example autonomys-agent/characters/djcharacter/config/.env 
 yarn install
 yarn dev djcharacter
 ```
-Note : Make sure to create and fill the .env in `autonomys-agent/characters/djcharacter/config/.env`
+Note : Make sure to create and fill the .env in `autonomys-agent/characters/djcharacter/config/.env` using the `.env.example` in the same folder
 
 3. Frontend setup 
 ```sh
