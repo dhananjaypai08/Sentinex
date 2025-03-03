@@ -39,7 +39,7 @@ Web3 is fragmented, insecure, and lacks true autonomy:
 ---
 
 ### Installation and Setup
-1. Backend Setup 
+1. Backend Setup : Part 1
 ```sh
 cd backend 
 python3 -m venv env # or use conda to create virtual environment
@@ -52,7 +52,18 @@ Note : Make sure to create and fill the .env in `backend/.env` using the `backen
 
 Troubleshoot: For troubleshooting `certificate verification error`: Use conda as virtual environment
 
-2. Autonomys Agent setup 
+2. Backend Setup : Part 2
+```sh
+cd Zerepy
+python3 -m venv env # or use conda to create virtual environment
+sourc env/bin/activate
+pip install -r requirements.txt # or poetry run pip install -r requirements.txt
+cp .env.example .env
+poetry run python main.py --server
+```
+Note : Make sure to create and fill the .env in `Zerepy/.env` using the `Zerepy/.env.example`
+
+3. Autonomys Agent setup 
 ```sh
 cd autonomys-agent
 cp autonomys-agent/characters/djcharacter/config/.env.example autonomys-agent/characters/djcharacter/config/.env 
@@ -61,7 +72,7 @@ yarn dev djcharacter
 ```
 Note : Make sure to create and fill the .env in `autonomys-agent/characters/djcharacter/config/.env` using the `.env.example` in the same folder
 
-3. Frontend setup 
+4. Frontend setup 
 ```sh
 cd frontend 
 npm install 
