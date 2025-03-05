@@ -76,7 +76,7 @@ Note : Make sure to create and fill the .env in `autonomys-agent/characters/djch
 ```sh
 cd frontend 
 npm install 
-npm run tauri dev
+npm run dev
 ```
 
 Now you're project is running on localhost!
