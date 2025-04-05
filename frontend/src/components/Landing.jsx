@@ -226,7 +226,7 @@ const Landing = () => {
                 transition={{ duration: 0.5 }}
               >
                 <div className="inline-block mb-4 px-4 py-1 bg-violet-900/30 backdrop-blur-sm rounded-full border border-violet-800/50 text-violet-300 text-sm">
-                  Powered by Autonomys AI Agent Framework
+                  Powered by Secret AI SDK
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                   <span className="bg-gradient-to-r from-violet-400 to-fuchsia-500 bg-clip-text text-transparent">Limitless DeFi</span> Agent with Sentiment Intelligence
@@ -403,10 +403,9 @@ const Landing = () => {
             />
             
             <FeatureCard 
-              icon={Shield} 
-              title="Secure Network" 
-              description="Built on Autonomys' secure infrastructure with merkle proofs verification while bridging."
-              className="md:col-span-2 lg:col-span-1"
+              icon={Code} 
+              title="Secret AI SDK" 
+              description="Leverages the secure AI SDK for confidential computation and protected data handling."
             />
             
             <FeatureCard 
@@ -414,12 +413,15 @@ const Landing = () => {
               title="AI Agent Framework" 
               description="Powered by Autonomys' agent framework for seamless integration and autonomous operation."
             />
-            
+
             <FeatureCard 
-              icon={Code} 
-              title="Secret AI SDK" 
-              description="Leverages the secure AI SDK for confidential computation and protected data handling."
+              icon={Shield} 
+              title="Secure Network" 
+              description="Built on Autonomys' secure infrastructure with merkle proofs verification while bridging."
+              className="md:col-span-2 lg:col-span-1"
             />
+
+            
           </div>
         </div>
       </section>
