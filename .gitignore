@@ -3,5 +3,7 @@ frontend/.env
 backend/env/
 backend/src/__pycache__/
 backend/src/DefiAgent/__pycache__/
-backend/src/BridgeAgent/__pycache__/
+backend/src/BridgingAgent/__pycache__/
 frontend/node_modules/
+frontend/package-lock.json
+frontend/build/
