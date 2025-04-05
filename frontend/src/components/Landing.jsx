@@ -271,7 +271,7 @@ const Landing = () => {
                   <div className="mt-6 flex items-center justify-between">
                     <div>
                       <h3 className="text-xl font-bold">Secure Network</h3>
-                      <p className="text-gray-400">Autonomous AI Agent Framework</p>
+                      <p className="text-gray-400">Confidential AI Computation</p>
                     </div>
                     <div className="flex gap-2">
                       <motion.div 
