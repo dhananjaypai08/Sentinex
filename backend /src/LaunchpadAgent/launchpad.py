@@ -29,9 +29,9 @@ def deploy_contract(name: str, symbol: str, initialSupply: int, maxSupply: int):
     bytecode = contract_interface["bytecode"]
     
     nonce = w3.eth.get_transaction_count(account.address)
-    print(nonce)
     contract = w3.eth.contract(abi=abi, bytecode=bytecode)
-    print(contract)
+    balance = w3.eth.get_balance(account.address)
+    print(f"Account balance: {w3.from_wei(balance, 'ether')} ETH")
     initialSupply = initialSupply * 10**18
     maxSupply = maxSupply * 10**18
     gas_estimate = contract.constructor(name, symbol, initialSupply, maxSupply).estimate_gas({"from": account.address})
@@ -39,7 +39,7 @@ def deploy_contract(name: str, symbol: str, initialSupply: int, maxSupply: int):
 
     transaction = {
         'nonce': nonce,
-        'gas': gas_estimate,
+        'gas': int(gas_estimate * 1.2),
         'gasPrice': w3.eth.gas_price,
         'from': account.address,
     }
@@ -72,7 +72,7 @@ def mint_tokens(contract_address: str, to: str, amount: int):
     gas_estimate = contract.functions.mint(to, amount).estimate_gas({"from": account.address})
     transaction = {
         'nonce': nonce,
-        'gas': gas_estimate,
+        'gas': int(gas_estimate * 1.2),
         'gasPrice': w3.eth.gas_price,
         'from': account.address,
     }
@@ -82,7 +82,7 @@ def mint_tokens(contract_address: str, to: str, amount: int):
         tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)    
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
         print(f"Tokens minted successfully!")
-        print(f"Transaction hash: {tx_hash.hex()}")
+        print(f"Transaction hash: 0x{tx_hash.hex()}")
         return tx_hash.hex()
     except Exception as e:
         print(f"Error minting tokens: {str(e)}")

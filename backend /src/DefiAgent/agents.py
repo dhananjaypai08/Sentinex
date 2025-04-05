@@ -59,7 +59,7 @@ def intent_detection_and_slot_filling(prompt: str):
             )
         ]
         response = secret_ai_llm.invoke(messages, stream=False)
-        print(response.content)
+        # print(response.content)
         return response.content
     except Exception as e:
         return f"Error generating response: {str(e)}"
@@ -143,7 +143,7 @@ def sentiment_analysis(prompt: str, tweets: list):
             )
         ]
         response = secret_ai_llm.invoke(messages, stream=False)
-        print(response.content)
+        # print(response.content)
         return response.content
     except Exception as e:
         return f"Error generating response: {str(e)}"
@@ -203,7 +203,7 @@ def normal_query(prompt: str):
             )
         ]
         response = secret_ai_llm.invoke(messages, stream=False)
-        print(response.content)
+        # print(response.content)
         return response.content
     except Exception as e:
         return f"Error generating response: {str(e)}"

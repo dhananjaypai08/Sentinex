@@ -9,7 +9,7 @@ const TaurusTestnet = {
   name: "Autonomys Taurus Taurus",
   nativeCurrency: {name: 'Autonomys Taurus Testnet', symbol: 'tAi3', decimals: 18},
   rpcUrls: {
-    default: { http : ["https://auto-evm.taurus.autonomys.xyz/ws"] }
+    default: { http : ["https://auto-evm-0.taurus.subspace.network/ws"] }
   },
   blockExplorers: {
     default: { name: 'Taurus Testnet Explorer', url: "https://blockscout.taurus.autonomys.xyz/" }

@@ -220,7 +220,7 @@ const SocialLaunchpad = () => {
       const mintData = await mintResponse.json();
       completeStep('mint');
       
-      addMessage(`Successfully minted ${mintAmount.toLocaleString()} ${tokenInfoData.symbol} tokens. Transaction hash: https://blockscout.taurus.autonomys.xyz/tx/0x${mintData}`);
+      addMessage(`Successfully minted ${mintAmount.toLocaleString()} ${tokenInfoData.symbol} tokens. Transaction hash: https://sepolia.etherscan.io/tx/0x${mintData}`);
 
       // Step 4: Post Tweet
       setCurrentStep('tweet');
@@ -243,7 +243,7 @@ const SocialLaunchpad = () => {
         'bot',
         [
           {
-            url: `https://blockscout.taurus.autonomys.xyz/address/${deployData}`,
+            url: `https://sepolia.etherscan.io/address/${deployData}`,
             text: "View Token on Explorer"
           }
         ]
