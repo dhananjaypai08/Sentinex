@@ -15,7 +15,8 @@ export const Navbar = () => {
   const [secretjs, setSecretjs] = useState(null);
 
   const contractAddress = "secret1qcc2q9agpnfmxze6snujpv4thl5mpxhuvxgggd";
-  const contractCodeHash = "0a64345081cfe303fbb73250d31e0346e4ef60739fda2b1851356bf8c31361d6";
+  const contractCodeHash = "599ffaeb430fa3f3514e77853d792859b061c3142a0d6781ca203c5fe3e147c9";
+  const contractCodeId = 13625;
   const CHAIN_ID = "pulsar-3";
   const url = "https://pulsar.lcd.secretnodes.com";
   
@@ -61,6 +62,38 @@ export const Navbar = () => {
 
   }
 
+  const handleDeployContract = async () => {
+    const { balance } = await secretjs.query.bank.balance({
+      address: address,
+      denom: "uscrt",
+    });
+    console.log("Balance:", balance);
+    try {
+      const initMsg = {};
+      let tx = await secretjs.tx.compute.instantiateContract(
+        {
+          code_id: contractCodeId,
+          sender: address,
+          code_hash: contractCodeHash,
+          init_msg: initMsg,
+          label: "DJSecret " + Math.ceil(Math.random() * 10000),
+        },
+        {
+          gasLimit: 400_000,
+        }
+      );
+      const contractAddress = tx.arrayLog.find(
+        (log) => log.type === "message" && log.key === "contract_address"
+      ).value;
+      console.log("contract address")
+      console.log(contractAddress);
+    }
+    catch (error) {
+      console.error(error);
+    }
+ 
+  }
+
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -99,6 +132,10 @@ export const Navbar = () => {
             {/* <ConnectKitButton /> */}
             <Button className={`${connectedColorGradient} hover:bg-gradient-to-l text-white`} onClick={handleConnectWallet}>
               {connectMessage}
+            </Button>
+
+            <Button className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white ml-4" onClick={handleDeployContract}>
+              Deploy Contract 
             </Button>
           </motion.div>
         </div>
