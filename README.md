@@ -1,4 +1,4 @@
-# 🚀 Sentinex: The Ultimate Confidential Multi-Agent Platform for performing limitless tasks leveraging Secret SDK, Autonomys agents framework and AutoDrive  
+# 🚀 Sentinex: The Ultimate Confidential Multi-Agent Platform for performing limitless tasks leveraging Secret SDK and Secret Ecosystem  
 
 
 *Powering limitless tasks with Secret SDK, Autonomys agents, and AutoDrive.*  
