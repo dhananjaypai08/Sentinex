@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from './ui/Button';
 import { Sparkles, ArrowRight, FormInputIcon, ViewIcon, RocketIcon, Rocket, BrainCircuitIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { SecretNetworkClient, MsgExecuteContract } from "secretjs";
+import { SecretNetworkClient } from "secretjs";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -68,30 +68,7 @@ export const Navbar = () => {
       denom: "uscrt",
     });
     console.log("Balance:", balance);
-    try {
-      const initMsg = {};
-      let tx = await secretjs.tx.compute.instantiateContract(
-        {
-          code_id: contractCodeId,
-          sender: address,
-          code_hash: contractCodeHash,
-          init_msg: initMsg,
-          label: "DJSecret " + Math.ceil(Math.random() * 10000),
-        },
-        {
-          gasLimit: 400_000,
-        }
-      );
-      const contractAddress = tx.arrayLog.find(
-        (log) => log.type === "message" && log.key === "contract_address"
-      ).value;
-      console.log("contract address")
-      console.log(contractAddress);
-    }
-    catch (error) {
-      console.error(error);
-    }
- 
+
   }
 
 
