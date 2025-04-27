@@ -56,10 +56,13 @@ curl -X POST http://localhost:8000/agents/example/load \
 ```
 Note : Make sure to create and fill the .env in `Zerepy/.env` using the `Zerepy/.env.example`
 
-3. SNIP20 contract to compile to wasm 
+3. SNIP20 contract compilation and server to deploy and transfer tokens via secretjs express server
 ```sh
 cd snip20-reference-impl/
 make build-mainnet-reproducible
+cd node 
+npm install 
+node server.js
 ```
 
 4. Frontend setup 
