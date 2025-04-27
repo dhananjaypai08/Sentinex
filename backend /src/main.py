@@ -29,6 +29,7 @@ allow_headers = ["*"]
 
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=allow_credentials, allow_methods=allow_methods, allow_headers=allow_headers)
 base_url = "http://localhost:8000"
+secret_deploy_url = "http://localhost:3000/"
 
 @app.get("/")
 def read_root():
@@ -70,16 +71,35 @@ async def lauchpad_chat(request: Request):
 @app.post("/deployContract")
 async def deploy_contract_endpoint(request: Request):
     body = await request.json()
-    response = deploy_contract(body["name"], body["symbol"], body["initialSupply"], body["maxSupply"])  
-    print(response)
-    return response
+    # response = deploy_contract(body["name"], body["symbol"], body["initialSupply"], body["maxSupply"])  
+    # print(response)
+    headers = {
+    "Content-Type": "application/json"
+    }
+    payload = {
+        "name": body["name"],
+        "symbol": body["symbol"],
+        "initialAmount": body["initialSupply"],
+    }
+    response = requests.post(secret_deploy_url+"deploy", json=payload, headers=headers)
+    return response.json()
 
 @app.post("/mintTokens")
 async def mint_tokens_endpoint(request: Request):
     body = await request.json()
-    response = mint_tokens(body["contractAddress"], body["to"], body["amount"])
-    print(response)
-    return response
+    # response = mint_tokens(body["contractAddress"], body["to"], body["amount"])
+    # print(response)
+    headers = {
+    "Content-Type": "application/json"
+    }
+    payload = {
+        "contractAddress": body["contractAddress"],
+        "recipient": body["recipient"],
+        "amount": body["amount"],
+        "contractCodeHash": body["contractCodeHash"]
+    }
+    response = requests.post(secret_deploy_url+"transfer", json=payload, headers=headers)
+    return response.json()
 
 @app.post("/sentimentAnalysis")
 async def sentiment_analysis_endpoint(request: Request):

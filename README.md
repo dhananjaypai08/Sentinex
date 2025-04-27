@@ -1,4 +1,4 @@
-# 🚀 Sentinex: The Ultimate Confidential Multi-Agent Platform for performing limitless tasks leveraging Secret SDK and Secret Ecosystem  
+# 🚀 Sentinex: Confidential Multi-Agent DeFi Launcher powered by Secret AI SDK and SecretSwap
 
 
 *Powering limitless tasks with Secret SDK, Autonomys agents, and AutoDrive.*  
@@ -13,28 +13,11 @@ Web3 is fragmented, insecure, and lacks true autonomy:
 
 ---
 
-### 🛠️ **Features**  
-1. **Social Token Launch Agents:**  
-   - Detect trends on Twitter via @aixbt_agent.  
-   - Launch tokens with Secret SDK.  
-   - Mint 50% supply and auto-tweet the token contract.  
+### 🛠️ **High Level Overview**  
 
-2. **Secure & Fast Bridging + Smart Faucet:**  
-   - **Agent 1:** Transfers ETH to a gateway and sends Merkle proof.  
-   - **Agent 2:** Verifies proof and sends equivalent tAi3 tokens to the destination.  
+Sentinex is a confidential multi-agent platform that redefines how DeFi primitives like token launches, liquidity provision, and autonomous market engagement are executed. Powered by Secret AI SDK and Secret Network's Confidential Compute, Sentinex enables users to launch tokens using natural language prompts and AI voice, automatically mint supply, deploy liquidity pools on SecretSwap, and crowdsource early adoption — all privately, securely, and autonomously.
 
-3. **Confidential DeFi Analytics:**  
-   - Analyze token movements, slippage, and order ranges with **Secret SDK** — privately.  
-
-4. **Autonomous Security Audits:**  
-   - AI-powered smart contract audits on Secret Network with detailed fix suggestions.  
-
-5. **Personalized Trading Strategies:**  
-   - Design AI-driven strategies on **Autonomys Taurus testnet**.  
-   - Analyze protocol risk, liquidity, and token volumes with **Secret SDK**.  
-
-6. **Persistent Verifiable Memory:**  
-   - Use **AutoDrive** to store and retrieve past interactions and tweets from @aixbt_agent.  
+Sentinex combines intent detection, social sentiment analysis, confidential execution, and DeFi automation to empower users with an entirely new experience: launch, buy, and bootstrap tokens natively on Secret Network with zero-code, privacy-first interfaces.
 
 ---
 
@@ -45,6 +28,7 @@ cd backend
 python3 -m venv env # or use conda to create virtual environment
 sourc env/bin/activate
 pip install -r requirements.txt
+# Copy and paste everything in backend/commands.txt to your terminal 
 cp .env.example .env
 python3 src/main.py
 ```
@@ -55,22 +39,31 @@ Troubleshoot: For troubleshooting `certificate verification error`: Use conda as
 2. Backend Setup : Part 2
 ```sh
 cd Zerepy
-python3 -m venv env # or use conda to create virtual environment
-sourc env/bin/activate
-pip install -r requirements.txt # or poetry run pip install -r requirements.txt
 cp .env.example .env
+poetry install --extras server
 poetry run python main.py --server
+# Curl to load the zerepy example twitter agent
+curl -X POST http://localhost:8000/agents/example/load \
+-H "Content-Type: application/json" \
+-d '{
+"agent_id": "example",
+"config": {
+"memory_limit": 1024,
+"timeout": 60
+}
+}'
+
 ```
 Note : Make sure to create and fill the .env in `Zerepy/.env` using the `Zerepy/.env.example`
 
-3. Autonomys Agent setup 
+3. SNIP20 contract compilation and server to deploy and transfer tokens via secretjs express server
 ```sh
-cd autonomys-agent
-cp autonomys-agent/characters/djcharacter/config/.env.example autonomys-agent/characters/djcharacter/config/.env 
-yarn install
-yarn dev djcharacter
+cd snip20-reference-impl/
+make build-mainnet-reproducible
+cd node 
+npm install 
+node server.js
 ```
-Note : Make sure to create and fill the .env in `autonomys-agent/characters/djcharacter/config/.env` using the `.env.example` in the same folder
 
 4. Frontend setup 
 ```sh
@@ -87,19 +80,15 @@ Now you're project is running on localhost!
    - Monitors @aixbt_agent for market conditions.  
    - Tweets new token launches and engages in crypto discussions.  
 
-2. **Secret SDK:**  
+2. **Secret AI SDK:**  
    - Intent detection and slot filling.  
-   - Token bridging, DeFi protocol analysis, and arbitrage optimization.  
-   - Confidential security audits.  
+   - Token launches
+   - DeFi protocol analysis, and arbitrage optimization.   
 
-3. **AutoDrive:**  
-   - The long-term memory of the agent.  
-   - Stores historical interactions and uploaded DSN data.  
-
-4. **Cohere Agent:**  
+3. **Cohere Agent:**  
    - Ensures structured and accurate outputs.  
 
-5. **AI Agent Overall work:**  
+4. **AI Agent Overall work:**  
    - Drives token launch logic, security audits, and sentiment analysis via Secret SDK and Autonomys Agent.  
 
 ---

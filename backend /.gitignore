@@ -1,6 +1,5 @@
 .env
 src/__pycache__/
 src/DefiAgent/__pycache__/
-commands.txt
 src/LaunchpadAgent/__pycache__/
 src/BridgingAgent/__pycache__/
