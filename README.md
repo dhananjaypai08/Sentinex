@@ -8,8 +8,7 @@ Web3 is fragmented, insecure, and lacks true autonomy:
 - **Fragmented DeFi:** 100+ protocols for swapping, bridging, and leveraging — overwhelming for new users.  
 - **Rugpull Token Launches:** 1000s of tokens launched without real community engagement.  
 - **Privacy Risks:** Front-running, data leaks, and surveillance.  
-- **Limited Autonomy:** Hard to automate event-driven tasks.  
-- **Complex Workflows:** Managing state, memory, and long-term decisions.  
+- **Limited Autonomy:** Hard to automate event-driven tasks.
 
 ---
 
