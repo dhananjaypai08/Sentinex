@@ -1,7 +1,7 @@
 # 🚀 Sentinex: Confidential Multi-Agent DeFi Launcher powered by Secret AI SDK and SecretSwap
 
 
-*Powering limitless tasks with Secret SDK, Autonomys agents, and AutoDrive.*  
+*Powering limitless tasks with Secret AI SDK and SNIP20*  
 
 ### 🧠 **Problem**  
 Web3 is fragmented, insecure, and lacks true autonomy:  
