@@ -27,8 +27,8 @@ def intent_detection_and_slot_filling(prompt: str):
                     - Slot fill the JSON structure accordingly
                     - If you can't detect token name, that is the `name` field then create a random name for the token
                     - If you can't detect token symbol, that is the `symbol` field then create a random symbol for the token. For example for token Name : "Agentonic" the symbol can be "AGT"
-                    - If you can't detect token initial supply, that is the `initialSupply` field then the default value for initial supply is 1000000
-                    - If you can't detect token max supply, that is the `maxSupply` field then the default value for max supply is 10000000
+                    - If you can't detect token initial supply, that is the `initialSupply` field then the default value for initial supply is 1000000000
+                    - If you can't detect token max supply, that is the `maxSupply` field then the default value for max supply is 100000000000
                     Required JSON Structure:
                     {
                         "name": "string", # name of the token

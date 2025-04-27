@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Define step data
 const STEPS = [
   { id: 'analyze', title: 'Analysis', icon: BarChart2 },
   { id: 'deploy', title: 'Deployment', icon: Code },
@@ -23,13 +22,11 @@ const STEPS = [
   { id: 'tweet', title: 'Publishing', icon: Twitter }
 ];
 
-// Utility to generate a deterministic gradient based on message content
 const generateGradient = (content, isUser) => {
   if (isUser) {
     return 'from-[#0A2540] to-[#1A365D]';
   }
   
-  // For system messages based on content to give visual variety
   if (content.includes("error") || content.includes("sorry")) {
     return 'from-[#2D3748] to-[#1A202C]';
   } else if (content.includes("✅") || content.includes("success")) {
@@ -84,7 +81,6 @@ const MessageBubble = ({ message }) => {
   );
 };
 
-// Professional step indicator with better visual feedback
 const StepIndicator = ({ currentStep, completedSteps }) => {
   return (
     <motion.div 
@@ -155,26 +151,22 @@ const SocialLaunchpad = () => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    // Welcome message - only add it once
     if (messages.length === 0 && !hasAddedWelcomeMessage.current) {
       addMessage("Welcome to the Social Launchpad. I can help you deploy your token in a few simple steps. Describe your token (e.g., Create a token named Rocket with symbol RKT and supply of 100,000).");
       hasAddedWelcomeMessage.current = true;
     }
     
-    // Focus input on initial load
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, [messages]);
 
   useEffect(() => {
-    // Auto-scroll to bottom when new messages arrive
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
 
-  // Ensure the step indicator has enough space at the bottom
   useEffect(() => {
     if (currentStep && messageContainerRef.current) {
       messageContainerRef.current.style.paddingBottom = '120px';
@@ -201,7 +193,6 @@ const SocialLaunchpad = () => {
     setIsProcessing(true);
 
     try {
-      // Step 1: Sentiment Analysis
       setCurrentStep('analyze');
       const sentimentResponse = await fetch('http://localhost:5001/sentimentAnalysis', {
         method: 'POST',
@@ -225,11 +216,9 @@ const SocialLaunchpad = () => {
       completeStep('analyze');
       addMessage("✅ Market sentiment analysis complete. Current market conditions look favorable for your token launch.");
       
-      // Step 2: Deploy Contract
       setCurrentStep('deploy');
-      addMessage("Deploying your token contract on Sepolia. Smart contract compilation in progress...");
+      addMessage("Deploying your token contract on Secret Testnet. Smart contract compilation in progress...");
       
-      // Add short delay to simulate real network activity
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       const deployResponse = await fetch('http://localhost:5001/deployContract', {
@@ -240,32 +229,31 @@ const SocialLaunchpad = () => {
       const deployData = await deployResponse.json();
       completeStep('deploy');
       
-      addMessage(`✅ Contract deployed successfully. ${tokenInfoData.name} (${tokenInfoData.symbol}) is now live on the sepolia.`);
+      addMessage(`✅ Contract deployed successfully. ${tokenInfoData.name} (${tokenInfoData.symbol}) is now live on the secret testnet.`);
       
-      // Step 3: Mint Tokens
       setCurrentStep('mint');
-      const mintAmount = Math.floor(tokenInfoData.initialSupply * 0.5);
+      const mintAmount = Math.floor(tokenInfoData.initialSupply * 0.05);
       addMessage(`Minting ${mintAmount.toLocaleString()} tokens to ${tokenInfoData.owner.slice(0, 6)}...${tokenInfoData.owner.slice(-4)}`);
       
       const mintResponse = await fetch('http://localhost:5001/mintTokens', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          contractAddress: deployData,
-          to: tokenInfoData.owner,
-          amount: mintAmount
+          contractAddress: deployData.contractAddress,
+          recipient: tokenInfoData.owner,
+          contractCodeHash: deployData.contractCodeHash,
+          amount: mintAmount,
         })
       });
       const mintData = await mintResponse.json();
       completeStep('mint');
       
-      addMessage(`✅ Successfully minted ${mintAmount.toLocaleString()} ${tokenInfoData.symbol} tokens. Transaction hash: 0x${mintData.slice(0, 10)}...${mintData.slice(-6)}`);
+      addMessage(`✅ Successfully minted ${mintAmount.toLocaleString()} ${tokenInfoData.symbol} tokens. Transaction hash: ${mintData.transactionHash}`);
 
-      // Step 4: Post Tweet
       setCurrentStep('tweet');
       addMessage("Publishing launch announcement to social platforms...");
       
-      const tweetContent = `I deployed my own token named $${tokenInfoData.symbol} on Sepolia and here is the contract address: ${deployData}`;
+      const tweetContent = `I deployed my own token named $${tokenInfoData.symbol} on Secret Testnet and here is the contract address: ${deployData.contractAddress}`;
       const tweetResponse = await fetch('http://localhost:5001/postTweet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -276,14 +264,13 @@ const SocialLaunchpad = () => {
       
       addMessage("✅ Launch announcement has been published to social channels.");
 
-      // Final success message
       addMessage(
         "Token launch complete. You can now view your token on blockchain explorers and share it with your community.",
         'bot',
         [
           {
-            url: `https://sepolia.etherscan.io/address/${deployData}`,
-            text: "View on Blockchain Explorer"
+            url: `https://testnet.ping.pub/secret/account/${deployData.contractAddress}`,
+            text: "View on Secret Pulsar Explorer"
           }
         ]
       );
@@ -293,7 +280,7 @@ const SocialLaunchpad = () => {
         `• Name: ${tokenInfoData.name}\n` +
         `• Symbol: ${tokenInfoData.symbol}\n` +
         `• Initial Supply: ${mintAmount.toLocaleString()} tokens\n` +
-        `• Contract: ${deployData.slice(0, 8)}...${deployData.slice(-6)}\n` +
+        `• Contract: ${deployData.contractAddress.slice(0, 8)}...${deployData.contractAddress.slice(-6)}\n` +
         `• Market Sentiment: Positive\n` +
         `• Social Visibility: High`
       );
@@ -324,7 +311,7 @@ const SocialLaunchpad = () => {
           </div>
           <div className="flex items-center space-x-2">
             <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-            <span className="text-xs text-gray-400">Network: Sepolia</span>
+            <span className="text-xs text-gray-400">Network: Pulsar-3</span>
           </div>
         </div>
         
