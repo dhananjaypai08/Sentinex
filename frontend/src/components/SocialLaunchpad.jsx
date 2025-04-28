@@ -149,6 +149,9 @@ const SocialLaunchpad = () => {
   const messageContainerRef = useRef(null);
   const hasAddedWelcomeMessage = useRef(false);
   const inputRef = useRef(null);
+  const [contractAddress, setContractAddress] = useState("");
+  const [coinName, setCoinName] = useState(" boi og vibes");
+  const [coinSymbol, setCoinSymbol] = useState("");
 
   useEffect(() => {
     if (messages.length === 0 && !hasAddedWelcomeMessage.current) {
@@ -207,6 +210,8 @@ const SocialLaunchpad = () => {
         body: JSON.stringify({ prompt: userPrompt })
       });
       const tokenInfoData = await tokenInfo.json();
+      setCoinName(tokenInfoData.name);
+      setCoinSymbol(tokenInfoData.symbol);
       
       if (!sentimentData.sentiment) {
         addMessage("I'm sorry, but the market sentiment doesn't seem favorable right now. Consider trying again later.");
@@ -227,6 +232,7 @@ const SocialLaunchpad = () => {
         body: JSON.stringify(tokenInfoData)
       });
       const deployData = await deployResponse.json();
+      setContractAddress(deployData.contractAddress);
       completeStep('deploy');
       
       addMessage(`✅ Contract deployed successfully. ${tokenInfoData.name} (${tokenInfoData.symbol}) is now live on the secret testnet.`);

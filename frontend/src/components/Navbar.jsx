@@ -38,10 +38,10 @@ export const Navbar = () => {
               <span>Social Launchpad</span>
             </Link>
 
-            <Link to="/defi-chat" className="text-gray-300 hover:text-white flex items-center gap-1.5 transition-colors">
+            {/* <Link to="/defi-chat" className="text-gray-300 hover:text-white flex items-center gap-1.5 transition-colors">
               <BrainCircuitIcon className="w-4 h-4" />
               <span>Defi Chat</span>
-            </Link>
+            </Link> */}
             
           </div>
           
