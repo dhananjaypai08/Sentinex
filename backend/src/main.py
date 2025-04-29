@@ -67,6 +67,8 @@ async def lauchpad_chat(request: Request):
     prompt = body["prompt"]
     response = intent_detection_and_slot_filling(prompt)
     response = parse_ai_agent_launchpad_response(response)
+    if response["owner"] == "None" or response["owner"] == "" or response["owner"] == None or response["owner"] == "0x":
+        response["owner"] = None
     print(response)
     return response
 

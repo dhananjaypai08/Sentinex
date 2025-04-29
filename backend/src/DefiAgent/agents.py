@@ -27,15 +27,14 @@ def intent_detection_and_slot_filling(prompt: str):
                     - Slot fill the JSON structure accordingly
                     - If you can't detect token name, that is the `name` field then create a random name for the token
                     - If you can't detect token symbol, that is the `symbol` field then create a random symbol for the token. For example for token Name : "Agentonic" the symbol can be "AGT"
+                    - if you can't detect token owner, that is the `owner` field then return `None` for the owner. Strictly return `None` for the wallet address if not detected else extract that wallet address
                     - If you can't detect token initial supply, that is the `initialSupply` field then the default value for initial supply is 1000000000
-                    - If you can't detect token max supply, that is the `maxSupply` field then the default value for max supply is 100000000000
                     Required JSON Structure:
                     {
                         "name": "string", # name of the token
                         "symbol": "string", # symbol of the token
                         "initialSupply": "integer", # initial supply of the token
-                        "maxSupply": "integer", # max supply of the token,
-                        "owner": "string" # owner of the token
+                        "owner": "string" # owner of the token, if no address then return `None`
                     }
 
                     response_format={"type": "json_object",
@@ -45,10 +44,9 @@ def intent_detection_and_slot_filling(prompt: str):
                                     "name": {"type": "string"},
                                     "symbol": {"type": "string"},
                                     "initialSupply": {"type": "integer"},
-                                    "maxSupply": {"type": "integer"},
                                     "owner": {"type": "string"} # owner of the token   
                                 },
-                                "required": ["name", "symbol", "initialSupply", "maxSupply", "owner"]
+                                "required": ["name", "symbol", "initialSupply", "owner"]
                              }
                         }
                     """

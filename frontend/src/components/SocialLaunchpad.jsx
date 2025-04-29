@@ -306,6 +306,10 @@ const SocialLaunchpad = () => {
         body: JSON.stringify({ prompt: userPrompt })
       });
       const tokenInfoData = await tokenInfo.json();
+      if(!tokenInfoData.name || !tokenInfoData.symbol || !tokenInfoData.initialSupply) {
+        addBotMessage("I'm sorry, but I couldn't extract the token name, symbol, or supply from your request. Please try again.");
+        return;
+      }
       setCoinName(tokenInfoData.name);
       setCoinSymbol(tokenInfoData.symbol);
       
