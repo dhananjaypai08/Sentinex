@@ -197,14 +197,14 @@ const SocialLaunchpad = () => {
 
     try {
       setCurrentStep('analyze');
-      const sentimentResponse = await fetch('http://localhost:5001/sentimentAnalysis', {
+      const sentimentResponse = await fetch('http://13.232.13.150:5001/sentimentAnalysis', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userPrompt })
       });
       const sentimentData = await sentimentResponse.json();
 
-      const tokenInfo = await fetch('http://localhost:5001/launchpadChat', {
+      const tokenInfo = await fetch('http://13.232.13.150:5001/launchpadChat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userPrompt })
@@ -226,7 +226,7 @@ const SocialLaunchpad = () => {
       
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      const deployResponse = await fetch('http://localhost:5001/deployContract', {
+      const deployResponse = await fetch('http://13.232.13.150:5001/deployContract', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(tokenInfoData)
@@ -241,7 +241,7 @@ const SocialLaunchpad = () => {
       const mintAmount = Math.floor(tokenInfoData.initialSupply * 0.05);
       addMessage(`Minting ${mintAmount.toLocaleString()} tokens to ${tokenInfoData.owner.slice(0, 6)}...${tokenInfoData.owner.slice(-4)}`);
       
-      const mintResponse = await fetch('http://localhost:5001/mintTokens', {
+      const mintResponse = await fetch('http://13.232.13.150:5001/mintTokens', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -259,8 +259,8 @@ const SocialLaunchpad = () => {
       setCurrentStep('tweet');
       addMessage("Publishing launch announcement to social platforms...");
       
-      const tweetContent = `I deployed my own token named $${tokenInfoData.symbol} on Secret Testnet and here is the contract address: ${deployData.contractAddress}`;
-      const tweetResponse = await fetch('http://localhost:5001/postTweet', {
+      const tweetContent = `JUST IN!! Someone deployed their own token named $${tokenInfoData.symbol} on Secret Testnet and here is the contract address: ${deployData.contractAddress}`;
+      const tweetResponse = await fetch('http://13.232.13.150:5001/postTweet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: tweetContent })
