@@ -351,22 +351,6 @@ const SocialLaunchpad = () => {
       completeStep('mint');
       
       addBotMessage(`✅ Successfully minted ${mintAmount.toLocaleString()} ${tokenInfoData.symbol} tokens. Transaction hash: ${mintData.transactionHash}`);
-
-      setCurrentStep('tweet');
-      addBotMessage("Publishing launch announcement to social platforms...");
-      
-      // Tweet API call
-      const tweetContent = `JUST IN!! Someone deployed their own token named $${tokenInfoData.symbol} on Secret Testnet and here is the contract address: ${deployData.contractAddress}`;
-      const tweetResponse = await fetch('https://sentinex-production.up.railway.app/postTweet', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: tweetContent })
-      });
-      const tweetData = await tweetResponse.json();
-      completeStep('tweet');
-      
-      addBotMessage("✅ Launch announcement has been published to social channels.");
-
       addBotMessage(
         "Token launch complete. You can now view your token on blockchain explorers and share it with your community.",
         [
@@ -376,6 +360,27 @@ const SocialLaunchpad = () => {
           }
         ]
       );
+
+      setCurrentStep('tweet');
+      addBotMessage("Publishing launch announcement to social platforms...");
+      
+      try{
+        const tweetContent = `JUST IN!! Someone deployed their own token named $${tokenInfoData.symbol} on Secret Testnet and here is the contract address: ${deployData.contractAddress}`;
+        const tweetResponse = await fetch('https://sentinex-production.up.railway.app/postTweet', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: tweetContent })
+        });
+        const tweetData = await tweetResponse.json();
+        completeStep('tweet');
+      
+        addBotMessage("✅ Launch announcement has been published to social channels.");
+      }catch(error){
+        completeStep('tweet');
+        addBotMessage("🚨 Failed to publish launch announcement. X API limit reached.");
+        
+      }
+      
       
       addBotMessage(
         `Token Summary\n\n` +
