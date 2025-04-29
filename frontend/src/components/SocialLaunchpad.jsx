@@ -469,7 +469,7 @@ const SocialLaunchpad = () => {
                   onClick={handleExampleToken}
                   className="w-full px-3 py-2 bg-[#162234]/80 rounded-md border border-gray-700/30 text-left text-xs text-gray-300"
                 >
-                  Try example: Create Cosmic (CSMC) token
+                  Try example: Create Cosmic (CSMC) token to this address secret1k9aa9j3xa734s2zp5ldqmewugmnk888xt4y40u
                 </motion.button>
                 <motion.button
                   whileTap={{ scale: 0.98 }}
