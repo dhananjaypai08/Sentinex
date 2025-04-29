@@ -338,7 +338,7 @@ const SocialLaunchpad = () => {
       addBotMessage(`✅ Contract deployed successfully. ${tokenInfoData.name} (${tokenInfoData.symbol}) is now live on the secret testnet.`);
       
       setCurrentStep('mint');
-      const mintAmount = Math.floor(tokenInfoData.initialSupply * 0.05);
+      const mintAmount = Math.floor(tokenInfoData.initialSupply * 0.5);
       addBotMessage(`Minting ${mintAmount.toLocaleString()} tokens to ${tokenInfoData.owner.slice(0, 6)}...${tokenInfoData.owner.slice(-4)}`);
       
       // Mint tokens API call
