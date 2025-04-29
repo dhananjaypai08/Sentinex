@@ -10,6 +10,10 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
+app.get("/healthcheck", (req, res) => {
+  res.status(200).send("OK"); 
+});
+
 app.post("/deploy", async (req, res) => {
   try {
     const { name, symbol, initialAmount } = req.body;
