@@ -370,7 +370,7 @@ const SocialLaunchpad = () => {
       addBotMessage("Publishing launch announcement to social platforms...");
       
       try{
-        const tweetContent = `JUST IN!! Someone deployed their own token named $${tokenInfoData.symbol} on Secret Testnet and here is the contract address: ${deployData.contractAddress}`;
+        const tweetContent = `JUST IN!! Someone deployed their own token $${tokenInfoData.symbol} named: ${tokenInfoData.name} on Secret Testnet and here is the contract address: ${deployData.contractAddress}`;
         const tweetResponse = await fetch('https://sentinex-production.up.railway.app/postTweet', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
