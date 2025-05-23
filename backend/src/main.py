@@ -28,10 +28,10 @@ allow_methods = ["*"]
 allow_headers = ["*"]
 
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=allow_credentials, allow_methods=allow_methods, allow_headers=allow_headers)
-base_url = "http://localhost:8000"
-# base_url = "https://sentinex-zerepytwitter.onrender.com"
-secret_deploy_url = "http://localhost:3000/"
-# secret_deploy_url = "https://sentinex.onrender.com/"
+# base_url = "http://localhost:8000"
+base_url = "https://sentinex-zerepytwitter.onrender.com"
+# secret_deploy_url = "http://localhost:3000/"
+secret_deploy_url = "https://sentinex.onrender.com/"
 
 @app.get("/")
 def read_root():
